@@ -195,5 +195,19 @@
   <!-- Calendly widget script -->
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+  <!-- Redirect to the thank-you page after a booking is completed in the inline embed -->
+  <script>
+  (function () {
+    function isCalendlyEvent(e) {
+      return e && e.data && typeof e.data.event === 'string' && e.data.event.indexOf('calendly') === 0;
+    }
+    window.addEventListener('message', function (e) {
+      if (isCalendlyEvent(e) && e.data.event === 'calendly.event_scheduled') {
+        window.location.href = 'https://book.citycapital.ca/thank-you';
+      }
+    });
+  })();
+  </script>
 </body>
 </html>
