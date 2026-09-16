@@ -209,5 +209,23 @@
     });
   })();
   </script>
+
+  <!-- On landing, auto-scroll down to the booking calendar so it's the first thing visitors see -->
+  <script>
+  (function () {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.addEventListener('load', function () {
+      if (window.location.hash) return; /* respect direct anchor links */
+      setTimeout(function () {
+        var target = document.getElementById('book');
+        if (!target) return;
+        var header = document.querySelector('.site-header');
+        var offset = header ? header.offsetHeight : 0;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }, 450);
+    });
+  })();
+  </script>
 </body>
 </html>
